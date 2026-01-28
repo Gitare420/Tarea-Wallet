@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Billetera Virtual</title>
+
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav
+      id="barra-navegacion"
+      class="navbar navbar-expand-lg navbar-dark bg-primary oculto"
+    >
+      <a class="navbar-brand" href="#">Mi Billetera</a>
+      <button
+        id="botonHamburguesa"
+        class="navbar-toggler"
+        type="button"
+        style="display: block"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="menuDesplegable">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#" onclick="cambiarPantalla('vista-menu')"
+              >Inicio</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="#"
+              onclick="cambiarPantalla('vista-depositar')"
+              >Depositar</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="#"
+              onclick="cambiarPantalla('vista-enviar')"
+              >Enviar Dinero</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="#"
+              onclick="cambiarPantalla('vista-movimientos')"
+              >Movimientos</a
+            >
+          </li>
+        </ul>
+        <button
+          onclick="cerrarSesion()"
+          class="btn btn-outline-light my-2 my-sm-0"
+        >
+          Salir
+        </button>
+      </div>
+    </nav>
+
+    <div class="contenedor-app">
+      <div id="vista-login" class="card p-4 shadow-sm mt-5">
+        <div class="text-center mb-4">
+          <h3>Iniciar Sesión</h3>
+          <small class="text-muted">Banca Móvil</small>
+        </div>
+        <form id="formLogin">
+          <div class="form-group">
+            <label>Correo:</label>
+            <input
+              type="email"
+              id="inputEmail"
+              class="form-control"
+              placeholder="palta@mayo.cl"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label>Contraseña:</label>
+            <input
+              type="password"
+              id="inputPass"
+              class="form-control"
+              placeholder="Palta123"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">
+            Ingresar
+          </button>
+        </form>
+      </div>
+
+      <div id="vista-menu" class="oculto">
+        <div class="saldo-box shadow">
+          <h3>Saldo Disponible</h3>
+          <h1>$<span id="saldoPantalla">0.00</span></h1>
+        </div>
+        <div class="row">
+          <div class="col-6 mb-3">
+            <button
+              onclick="cambiarPantalla('vista-depositar')"
+              class="btn btn-light btn-block shadow-sm py-4"
+            >
+              💰 Depositar
+            </button>
+          </div>
+          <div class="col-6 mb-3">
+            <button
+              onclick="cambiarPantalla('vista-enviar')"
+              class="btn btn-light btn-block shadow-sm py-4"
+            >
+              💸 Enviar
+            </button>
+          </div>
+          <div class="col-12">
+            <button
+              onclick="cambiarPantalla('vista-movimientos')"
+              class="btn btn-info btn-block shadow-sm"
+            >
+              Ver Movimientos
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="vista-depositar" class="card p-4 oculto shadow-sm">
+        <h4>Depositar</h4>
+        <div class="form-group">
+          <input
+            type="number"
+            id="montoDeposito"
+            class="form-control"
+            placeholder="Monto ej: 5000"
+          />
+        </div>
+        <button onclick="funcionDepositar()" class="btn btn-success btn-block">
+          Confirmar
+        </button>
+        <button
+          onclick="cambiarPantalla('vista-menu')"
+          class="btn btn-link btn-block mt-2"
+        >
+          Cancelar
+        </button>
+      </div>
+
+      <div id="vista-enviar" class="card p-4 oculto shadow-sm">
+        <h4>Enviar Dinero</h4>
+        <div class="form-group">
+          <label>Destinatario:</label>
+          <select id="selectorContactos" class="form-control">
+            <option value="Dinamico">Dinamico</option>
+            <option value="Italiano">Italiano</option>
+            <option value="Barros luco">Barros luco</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <input
+            type="number"
+            id="montoEnvio"
+            class="form-control"
+            placeholder="Monto ej: 2000"
+          />
+        </div>
+        <button onclick="funcionEnviar()" class="btn btn-warning btn-block">
+          Transferir
+        </button>
+        <button
+          onclick="cambiarPantalla('vista-menu')"
+          class="btn btn-link btn-block mt-2"
+        >
+          Cancelar
+        </button>
+      </div>
+
+      <div id="vista-movimientos" class="card p-3 oculto shadow-sm">
+        <h4>Historial</h4>
+        <ul id="listaMovimientos" class="list-group list-group-flush mb-3"></ul>
+        <button
+          onclick="cambiarPantalla('vista-menu')"
+          class="btn btn-secondary btn-block"
+        >
+          Volver
+        </button>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
